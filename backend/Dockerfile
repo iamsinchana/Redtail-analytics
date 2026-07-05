@@ -5,6 +5,10 @@ FROM python:3.11-slim AS base
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
         libglib2.0-0 \
         libgomp1 \
+        libgl1 \
+        libxcb1 \
+        libsm6 \
+        libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
