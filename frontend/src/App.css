@@ -1,0 +1,292 @@
+/* ========================================
+   REDTAIL ANALYTICS — App Layout Styles
+   ======================================== */
+
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+/* ── Main Content ── */
+.app__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ── Header Bar ── */
+.app__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  min-height: 56px;
+  z-index: 10;
+}
+
+.app__header-left {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-lg);
+}
+
+.app__page-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.app__header-time {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
+}
+
+.app__header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ── Stats Row ── */
+.app__stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  flex-shrink: 0;
+}
+
+/* ── Dashboard Grid ── */
+.app__dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-md);
+  padding: 0 var(--space-xl) var(--space-lg);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.app__feed-area {
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.app__feed-area > * {
+  flex: 1;
+}
+
+.app__events-area {
+  grid-column: 2;
+  grid-row: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.app__events-area > * {
+  flex: 1;
+}
+
+.app__analytics-area {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 180px;
+  max-height: 280px;
+}
+
+.app__analytics-area > * {
+  height: 100%;
+}
+
+.app__zones-area {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 180px;
+  max-height: 280px;
+}
+
+.app__zones-area > * {
+  height: 100%;
+}
+
+/* ── Full Panel (non-dashboard views) ── */
+.app__full-panel {
+  flex: 1;
+  padding: 0 var(--space-xl) var(--space-lg);
+  min-height: 0;
+  display: flex;
+}
+
+.app__full-panel > * {
+  flex: 1;
+}
+
+/* ── Settings View ── */
+.app__settings {
+  flex: 1;
+  padding: var(--space-lg) var(--space-xl);
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  align-content: start;
+}
+
+.settings-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: fadeInScale 0.4s ease both;
+  transition: all var(--transition-base);
+}
+
+.settings-card:hover {
+  border-color: var(--border-glow);
+}
+
+.settings-card:nth-child(1) { animation-delay: 0.05s; }
+.settings-card:nth-child(2) { animation-delay: 0.1s; }
+.settings-card:nth-child(3) { animation-delay: 0.15s; }
+
+.settings-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+}
+
+.settings-card__header h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-card__desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.settings-card__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.settings-card__option-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: all var(--transition-base);
+}
+
+.settings-card__option-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-deep);
+  transform: translateX(4px);
+}
+
+.settings-card__option-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-card__option-desc {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+.settings-card__status-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.settings-card__status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.settings-card__status-item:last-child {
+  border-bottom: none;
+}
+
+.settings-card__status-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .app__stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .app__dashboard-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto auto auto;
+  }
+
+  .app__events-area {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: 300px;
+  }
+
+  .app__analytics-area {
+    grid-column: 1;
+    grid-row: 3;
+    max-height: none;
+  }
+
+  .app__zones-area {
+    grid-column: 1;
+    grid-row: 4;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app__stats-row {
+    grid-template-columns: 1fr;
+  }
+
+  .app__header-left {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .app__settings {
+    grid-template-columns: 1fr;
+  }
+}

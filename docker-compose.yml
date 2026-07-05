@@ -1,0 +1,85 @@
+version: "3.9"
+
+services:
+  # ── Backend: FastAPI + YOLOv8 + ByteTrack ──────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: redtail-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=${MODEL_NAME:-yolov8n.pt}
+      - CONFIDENCE_THRESHOLD=${CONFIDENCE_THRESHOLD:-0.35}
+      - IOU_THRESHOLD=${IOU_THRESHOLD:-0.45}
+      - VIDEO_SOURCE=${VIDEO_SOURCE:-}
+      - CROWD_THRESHOLD=${CROWD_THRESHOLD:-5}
+      - EVENT_RETENTION_SECONDS=${EVENT_RETENTION_SECONDS:-3600}
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000,http://frontend:3000
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - MLFLOW_EXPERIMENT_NAME=${MLFLOW_EXPERIMENT_NAME:-redtail-analytics}
+    volumes:
+      - ./videos:/app/videos           # Mount video files for processing
+      - model-cache:/root/.cache       # Cache model weights
+    restart: unless-stopped
+    depends_on:
+      - mlflow
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - redtail-net
+
+  # ── Frontend: React + Vite ─────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: redtail-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+      - VITE_WS_URL=ws://localhost:8000
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - redtail-net
+
+  # ── MLflow: Experiment Tracking ────────────────────────────────
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.16.0
+    container_name: redtail-mlflow
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:///mlflow/mlflow.db
+      --default-artifact-root /mlflow/artifacts
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow-data:/mlflow
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - redtail-net
+
+volumes:
+  model-cache:
+    driver: local
+  mlflow-data:
+    driver: local
+
+networks:
+  redtail-net:
+    driver: bridge

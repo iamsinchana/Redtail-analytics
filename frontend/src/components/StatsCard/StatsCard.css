@@ -1,0 +1,178 @@
+/* StatsCard Styles */
+
+.stats-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+  animation: fadeInScale 0.5s ease both;
+  min-width: 0;
+}
+
+.stats-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stats-card--pulse {
+  animation: cardPulse 0.3s ease;
+}
+
+/* ── Accent bar ── */
+.stats-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  transition: all var(--transition-base);
+}
+
+.stats-card--primary .stats-card__accent { background: var(--color-primary); }
+.stats-card--success .stats-card__accent { background: var(--color-success); }
+.stats-card--warning .stats-card__accent { background: var(--color-warning); }
+.stats-card--danger .stats-card__accent { background: var(--color-danger); }
+.stats-card--info .stats-card__accent { background: var(--color-info); }
+
+/* ── Icon ── */
+.stats-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.stats-card--primary .stats-card__icon {
+  background: var(--color-primary-glow);
+  color: var(--color-primary-light);
+}
+
+.stats-card--success .stats-card__icon {
+  background: var(--color-success-glow);
+  color: var(--color-success);
+}
+
+.stats-card--warning .stats-card__icon {
+  background: var(--color-warning-glow);
+  color: var(--color-warning);
+}
+
+.stats-card--danger .stats-card__icon {
+  background: var(--color-danger-glow);
+  color: var(--color-danger);
+}
+
+.stats-card--info .stats-card__icon {
+  background: var(--color-info-glow);
+  color: var(--color-info);
+}
+
+.stats-card:hover .stats-card__icon {
+  transform: scale(1.1);
+}
+
+/* ── Content ── */
+.stats-card__content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.stats-card__label {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stats-card__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.stats-card__value {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  line-height: 1;
+  transition: all var(--transition-fast);
+  color: var(--text-primary);
+}
+
+.stats-card__value--animating {
+  animation: countUp 0.2s ease;
+}
+
+.stats-card__suffix {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Trend ── */
+.stats-card__trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.stats-card__trend--up {
+  color: var(--color-success);
+  background: var(--color-success-glow);
+}
+
+.stats-card__trend--down {
+  color: var(--color-danger);
+  background: var(--color-danger-glow);
+}
+
+/* ── Sparkline bars ── */
+.stats-card__spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 28px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.stats-card__spark-bar {
+  width: 3px;
+  border-radius: 2px;
+  transition: height var(--transition-base);
+}
+
+.stats-card--primary .stats-card__spark-bar { background: var(--color-primary); }
+.stats-card--success .stats-card__spark-bar { background: var(--color-success); }
+.stats-card--warning .stats-card__spark-bar { background: var(--color-warning); }
+.stats-card--danger .stats-card__spark-bar { background: var(--color-danger); }
+.stats-card--info .stats-card__spark-bar { background: var(--color-info); }
+
+@keyframes cardPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}

@@ -1,0 +1,308 @@
+/* ZoneConfig Styles */
+
+.zone-config {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: slideInUp 0.5s ease both;
+  animation-delay: 0.35s;
+  min-height: 0;
+}
+
+/* ── Header ── */
+.zone-config__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+.zone-config__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+}
+
+.zone-config__title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.zone-config__count {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-glow);
+  color: var(--color-primary-light);
+}
+
+.zone-config__add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  color: var(--color-primary-light);
+  background: var(--color-primary-glow);
+  transition: all var(--transition-base);
+}
+
+.zone-config__add-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-glow-primary);
+}
+
+/* ── Form ── */
+.zone-config__form {
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background: var(--bg-surface-elevated);
+  animation: fadeIn 0.3s ease;
+}
+
+.zone-config__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zone-config__field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.zone-config__label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.zone-config__hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+}
+
+.zone-config__input,
+.zone-config__select {
+  padding: 8px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  transition: all var(--transition-base);
+  outline: none;
+  width: 100%;
+}
+
+.zone-config__input::placeholder {
+  color: var(--text-muted);
+}
+
+.zone-config__input:focus,
+.zone-config__select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+.zone-config__select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='%2394a3b8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+/* Color picker */
+.zone-config__colors {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.zone-config__color-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.zone-config__color-btn:hover {
+  transform: scale(1.2);
+}
+
+.zone-config__color-btn--active {
+  border-color: white;
+  box-shadow: 0 0 8px currentColor;
+  transform: scale(1.15);
+}
+
+/* Submit */
+.zone-config__submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: all var(--transition-base);
+  cursor: pointer;
+}
+
+.zone-config__submit-btn:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-glow-primary);
+  transform: translateY(-1px);
+}
+
+.zone-config__submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Zone List ── */
+.zone-config__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 0;
+}
+
+.zone-config__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xl);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.zone-config__empty-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Zone Card */
+.zone-config__zone-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition: all var(--transition-base);
+  animation: fadeIn 0.3s ease both;
+}
+
+.zone-config__zone-card:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-color);
+}
+
+.zone-config__zone-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.zone-config__zone-color-glow {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0.4;
+}
+
+.zone-config__zone-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.zone-config__zone-name {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.zone-config__zone-meta {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.zone-config__zone-type {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+}
+
+.zone-config__zone-type--counting {
+  background: var(--color-primary-glow);
+  color: var(--color-primary-light);
+}
+
+.zone-config__zone-type--restricted {
+  background: var(--color-danger-glow);
+  color: var(--color-danger);
+}
+
+.zone-config__zone-points {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+/* Zone preview */
+.zone-config__zone-preview {
+  width: 50px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.zone-config__zone-preview-svg {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
