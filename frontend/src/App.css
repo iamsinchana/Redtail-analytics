@@ -277,6 +277,17 @@
 }
 
 @media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .app__main {
+    overflow: visible;
+  }
+
   .app__stats-row {
     grid-template-columns: 1fr;
   }
